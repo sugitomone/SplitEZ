@@ -4,6 +4,10 @@ body {
   padding: 0;
 }
 
+input {
+	font-size:16px;
+}
+
 .container {
   background-color: #f5f5f5;
   margin: 20px;
