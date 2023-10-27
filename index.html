@@ -59,8 +59,8 @@
       if (isNaN(amount1) || isNaN(amount2)) {
         results.textContent = "正しい金額を入力してください。";
       } else {
-        const share1 = (amount1 / (amount1 + amount2)).toFixed(2);
-        const share2 = (amount2 / (amount1 + amount2)).toFixed(2);
+        const share1 = (amount1 / (amount1 + amount2)).toFixed(0);
+        const share2 = (amount2 / (amount1 + amount2)).toFixed(0);
 
         const resultText = `${person1}→${person2}：${share1}円\n${person２}→${person1}：${share2}円`;
         results.textContent = resultText;
