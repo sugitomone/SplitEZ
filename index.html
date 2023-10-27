@@ -1,41 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>割り勘アプリ</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px #000;
+    }
+
+    input[type="text"] {
+      width: 95%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+
+    .btn {
+      background-color: #00f;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-reset {
+      background-color: #ccc;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .results {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
-    <h1>割り勘計算</h1>
-    <form>
-      <div class="input-container">
-        <div class="name-input">
-          <input type="text" id="person1" placeholder="名前1">
-        </div>
-        <div class="amount-input">
-          <input type="number" id="amount1" placeholder="金額1">
-        </div>
-      </div>
-      <div class="input-container">
-        <div class="name-input">
-          <input type="text" id="person2" placeholder="名前2">
-        </div>
-        <div class="amount-input">
-          <input type="number" id="amount2" placeholder="金額2">
-        </div>
-      </div>
-      <div class="buttons">
-        <button id="calculateButton">計算</button>
-        <button type="button" id="resetButton">リセット</button>
-      </div>
-      <div id="results"></div>
-    </form>
+    <h2>割り勘計算</h2>
+    <input type="text" id="person1" placeholder="名前1">
+    <input type="text" id="amount1" placeholder="金額1">
+    <input type="text" id="person2" placeholder="名前2">
+    <input type="text" id="amount2" placeholder="金額2">
+    <button class="btn" id="calculateButton">計算</button>
+    <button class="btn-reset" id="resetButton">リセット</button>
+    <div class="results" id="results"></div>
   </div>
-  <script src="script.js"></script>
-  <footer>
-    &copy; 割り勘アプリ
-  </footer>
+  <script>
+    document.getElementById("calculateButton").addEventListener("click", function () {
+      const person1 = document.getElementById("person1").value;
+      const amount1 = parseFloat(document.getElementById("amount1").value);
+      const person2 = document.getElementById("person2").value;
+      const amount2 = parseFloat(document.getElementById("amount2").value);
+      const results = document.getElementById("results");
+
+      if (isNaN(amount1) || isNaN(amount2)) {
+        results.textContent = "正しい金額を入力してください。";
+      } else {
+        const share1 = (amount1 / (amount1 + amount2)).toFixed(2);
+        const share2 = (amount2 / (amount1 + amount2)).toFixed(2);
+
+        const resultText = `${person1} は ${share1} を支払うべきで、${person2} は ${share2} を支払うべきです.`;
+        results.textContent = resultText;
+      }
+    });
+
+    document.getElementById("resetButton").addEventListener("click", function () {
+      document.getElementById("person1").value = "";
+      document.getElementById("amount1").value = "";
+      document.getElementById("person2").value = "";
+      document.getElementById("amount2").value = "";
+      document.getElementById("results").textContent = "";
+    });
+  </script>
 </body>
 </html>
