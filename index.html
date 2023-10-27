@@ -27,13 +27,41 @@
         </div>
       </div>
       <button id="calculateButton">計算</button>
-      <button id="resetButton">リセット</button>
+      <button type="button" id="resetButton">リセット</button>
     </form>
     <div id="results"></div>
   </div>
   <script>
-    // JavaScript部分は前回のコードをそのまま使用
-    // ...
+    const calculateButton = document.getElementById("calculateButton");
+    const resetButton = document.getElementById("resetButton");
+    const resultsDiv = document.getElementById("results");
+
+    calculateButton.addEventListener("click", () => {
+      const total = 0; // ここで合計金額を計算
+      const person1 = document.getElementById("person1").value;
+      const amount1 = 0; // ここで金額を取得
+      const person2 = document.getElementById("person2").value;
+      const amount2 = 0; // ここで金額を取得
+
+      if (isNaN(total) || isNaN(amount1) || isNaN(amount2)) {
+        resultsDiv.textContent = "正しい数値を入力してください。";
+      } else {
+        const share1 = (amount1 / (amount1 + amount2)) * total;
+        const share2 = (amount2 / (amount1 + amount2)) * total;
+        const resultText = `${person1} は ${share1.toFixed(2)} を支払うべきで、${person2} は ${share2.toFixed(2)} を支払うべきです。`;
+        resultsDiv.textContent = resultText;
+      }
+    });
+
+    resetButton.addEventListener("click", () => {
+      // リセットボタンの処理をここに追加
+      resultsDiv.textContent = ""; // 計算結果を消去
+      // 例: 入力欄をクリアする
+      document.getElementById("person1").value = "";
+      document.getElementById("amount1").value = "";
+      document.getElementById("person2").value = "";
+      document.getElementById("amount2").value = "";
+    });
   </script>
   <footer>
     &copy; 2023 割り勘アプリ
