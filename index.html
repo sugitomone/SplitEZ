@@ -66,9 +66,9 @@
 
         let resultText = "";
 
-        if (amount1 > amount2) {
+        if (amount1 < amount2) {
           resultText = `${person1}は${person2}に${(amount1 - share).toFixed(0)}円支払ってください`;
-        } else if (amount2 > amount1) {
+        } else if (amount2 < amount1) {
           resultText = `${person2}は${person1}に${(amount2 - share).toFixed(0)}円支払ってください`;
         } else {
           resultText = "お互いに同じ金額を支払っています。";
