@@ -62,11 +62,10 @@
         results.textContent = "正しい金額を入力してください.";
       } else {
         const totalAmount = amount1 + amount2;
-        const share1 = amount1 / totalAmount;
-        const share2 = amount2 / totalAmount;
+        const share = totalAmount / 2;
 
-        const resultText = `${person1}→${person2}：${(share1 * totalAmount).toFixed(0)}円<br>${person2}→${person1}：${(share2 * totalAmount).toFixed(0)}円`;
-        results.innerHTML = resultText;
+        const resultText = `${person1}は${person2}に${(share - amount1).toFixed(0)}円支払ってください`;
+        results.textContent = resultText;
       }
     });
   </script>
