@@ -1,64 +1,71 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-}
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      text-align: center;
+      padding: 20px;
+    }
 
-.container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 0px #000;
+    }
 
-h1 {
-  text-align: center;
-  color: #333;
-}
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 5px 0;
+    }
 
-.input-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 10px;
-}
+    .btn {
+      background-color: #00f;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
 
-input {
-  width: 45%; /* 名前と金額の枠を調整 */
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
+    .results {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>割り勘計算</h2>
+    <input type="text" id="person1" placeholder="名前1">
+    <input type="text" id="amount1" placeholder="金額1">
+    <input type="text" id="person2" placeholder="名前2">
+    <input type="text" id="amount2" placeholder="金額2">
+    <button class="btn" id="calculateButton">計算</button>
+    <div class="results" id="results"></div>
+  </div>
+  <script>
+    document.getElementById("calculateButton").addEventListener("click", function () {
+      const person1 = document.getElementById("person1").value;
+      const amount1 = parseFloat(document.getElementById("amount1").value);
+      const person2 = document.getElementById("person2").value;
+      const amount2 = parseFloat(document.getElementById("amount2").value);
+      const results = document.getElementById("results");
 
-.buttons {
-  text-align: center;
-  margin-top: 20px; /* ボタンの上の余白追加 */
-}
+      if (isNaN(amount1) || isNaN(amount2)) {
+        results.textContent = "正しい金額を入力してください。";
+      } else {
+        const share1 = (amount1 / (amount1 + amount2)).toFixed(2);
+        const share2 = (amount2 / (amount1 + amount2)).toFixed(2);
 
-button {
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #87CEFA; /* 薄い水色 */
-  border: none;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 5px;
-}
-
-#results {
-  text-align: center;
-  margin-top: 20px;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
-}
-
-footer {
-  text-align: center;
-  margin-top: 20px;
-  color: #999;
-}
+        const resultText = `${person1} は ${share1} を支払うべきで、${person2} は ${share2} を支払うべきです.`;
+        results.textContent = resultText;
+      }
+    });
+  </script>
+</body>
+</html>
