@@ -1,22 +1,72 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>割り勘計算</title>
+  <title>割り勘アプリ</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <h1>割り勘計算</h1>
-    <div id="results">
-    </div>
-    <button id="calculateButton">計算</button>
-    <button id="resetButton">リセット</button>
+    <form>
+      <div>
+        <label for="total">合計金額:</label>
+        <input type="number" id="total" placeholder="合計金額">
+      </div>
+      <div>
+        <label for="person1">名前1:</label>
+        <input type="text" id="person1" placeholder="名前1">
+        <label for="amount1">金額1:</label>
+        <input type="number" id="amount1" placeholder="金額1">
+      </div>
+      <div>
+        <label for="person2">名前2:</label>
+        <input type="text" id="person2" placeholder="名前2">
+        <label for="amount2">金額2:</label>
+        <input type="number" id="amount2" placeholder="金額2">
+      </div>
+      <button id="calculateButton">計算</button>
+      <button id="resetButton">リセット</button>
+    </form>
+    <div id="results"></div>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const calculateButton = document.getElementById("calculateButton");
+      const resetButton = document.getElementById("resetButton");
+      const resultsDiv = document.getElementById("results");
+
+      calculateButton.addEventListener("click", function () {
+        const total = parseFloat(document.getElementById("total").value);
+        const person1 = document.getElementById("person1").value;
+        const amount1 = parseFloat(document.getElementById("amount1").value);
+        const person2 = document.getElementById("person2").value;
+        const amount2 = parseFloat(document.getElementById("amount2").value);
+
+        if (isNaN(total) || isNaN(amount1) || isNaN(amount2)) {
+          resultsDiv.innerHTML = "正しい数値を入力してください。";
+        } else {
+          const share1 = (amount1 / (amount1 + amount2)) * total;
+          const share2 = (amount2 / (amount1 + amount2)) * total;
+
+          const resultText = `${person1} は ${share1.toFixed(2)} を支払うべきで、${person2} は ${share2.toFixed(2)} を支払うべきです.`;
+          resultsDiv.textContent = resultText;
+        }
+      });
+
+      resetButton.addEventListener("click", function () {
+        document.getElementById("total").value = "";
+        document.getElementById("person1").value = "";
+        document.getElementById("amount1").value = "";
+        document.getElementById("person2").value = "";
+        document.getElementById("amount2").value = "";
+        resultsDiv.innerHTML = "";
+      });
+    });
+  </script>
   <footer>
-    &copy; 割り勘計算アプリ
+    &copy; 2023 割り勘アプリ
   </footer>
 </body>
 </html>
-
